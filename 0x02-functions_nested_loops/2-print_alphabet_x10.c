@@ -1,20 +1,20 @@
 #include "main.h"
 /**
-  *print_alphabet_x10 - Prints the alphabet 10 times.
-  *
-  *Return: Always 0 (Success)
+  * print_last_digit - a function that prints the last digit of a number
+  * @nld: number's last digit result
+  * Return: value of the last digit
   */
-void print_alphabet_x10(void)
+int print_last_digit(int nld)
 {
-	int i;
-	int j;
+	int pld;
 
-	for (j =1; i <= 10; i++)
+	pld = (nld % 10);
+
+	if (pld < 0)
 	{
-		for (j = 97; j <= 122; j++)
-		{
-			_putchar(j);
-		}
-		_putchar('\n');
+		pld = (-1 * pld);
 	}
+
+	_putchar(pld + '0');
+	return (pld);
 }
