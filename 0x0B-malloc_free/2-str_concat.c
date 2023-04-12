@@ -1,43 +1,52 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 /**
-  * alloc_grid - Write a function that returns a pointer to a 2 dimensional
-  * array of integers.
+  * str_concat - concatenate two strings
+  * @s1: a pointer to the first string
+  * @s2: a pointer to the second string
   *
-  * @height: height array
-  * @width: width array
-  *
-  * Return: Pointer
+  * Return: NULL if memory allocation fails,
+  * otherwise a pointer to a the new string
   */
-int **alloc_grid(int width, int height)
+char *str_concat(char *s1, char *s2)
 {
-	int **s, i, j, k;
+	unsigned int len1 = 0;
+	unsigned int len2 = 0;
+	char *cat;
 
-	if (width <= 0 || height <= 0)
-		return (NULL);
-	s = malloc(height * sizeof(int *));
-
-	if (s == NULL)
-		return (NULL);
-
-	for (i = 0; i < height; i++)
+	if (s1)
 	{
-		s[i] = malloc(width * sizeof(int));
-		if (s[i] == NULL)
-		{
-			for (k = 0; k <= i; k++)
-			{
-				free(s[k]);
-			}
-			free(s);
-			return (NULL);
-		}
-		for (j = 0; j < width; j++)
-		{
-			s[i][j] = 0;
-		}
+		while (s1[len1])
+			++len1;
 	}
-	return (s);
+	else
+	{
+		s1 = "";
+	}
+	if (s2)
+	{
+		while (s2[len2])
+			++len2;
+	}
+	else
+	{
+		s2 = "";
+	}
+
+	cat = (char *) malloc(sizeof(char) * (len1 + len2 + 1));
+
+	if (!cat)
+		return (NULL);
+	if (s1)
+	{
+		for (len1 = 0; s1[len1]; ++len1)
+			cat[len1] = s1[len1];
+	}
+	if (s2)
+	{
+		for (len2 = 0; s2[len2]; ++len2)
+			cat[len1 + len2] = s2[len2];
+	}
+	cat[len1 + len2] = '\0';
+	return (cat);
 }
