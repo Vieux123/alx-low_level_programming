@@ -3,10 +3,10 @@
 #include <stdlib.h>
 
 /**
-  * get_op_func - check if the operator is valid
-  * @s: value input operator
+  * get_op_func - selects the correct function the operation asked by the user.
+  * @s: The operator passed as argument.
   *
-  * Return: 0 if false, something else otherwise.
+  * Return: A pointer to the function to the operator given as a parameter.
   */
 int (*get_op_func(char *s))(int, int)
 {
@@ -21,12 +21,8 @@ int (*get_op_func(char *s))(int, int)
 	int i;
 
 	i = 0;
-	while (i < 6)
-	{
-		if (ops[i].op[0] == s[0])
-			return (ops[i].f);
+	while (ops[i].op != NULL && *(ops[i].op) != *s)
 		i++;
-	}
-	printf("Error\n");
-	exit(99);
+
+	return (ops[i].f);
 }
