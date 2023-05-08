@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdlib.h>
 #include "main.h"
 
 /**
@@ -9,20 +10,30 @@
   */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	char *buff;
-	ssize_t fd;
-	ssize_t w;
-	ssize_t t;
+	ssize_t fide, l, w;
+	char *tex;
 
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
+	tex = malloc(letters);
+	if (tex == NULL)
 		return (0);
-	buff = malloc(sizeof(char) * letters);
-	t = read(fd, buff, letters);
-	w = write(STDOUT_FILENO, buff, t);
 
-	free(buff);
-	close(fd);
+	if (filename == NULL)
+		return (0);
+
+	fide = open(filename, O_RDONLY);
+
+	if (fide == -1)
+	{
+		free(tex);
+		return (0);
+	}
+
+	l = read(fide, tex, letters);
+
+	w = write(STDOUT_FILENO, tex, l);
+
+	close(fide);
+
 	return (w);
 }
 
